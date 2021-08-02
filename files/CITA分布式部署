@@ -46,41 +46,40 @@
 		- 给 docker 配置镜像<https://www.runoob.com/docker/docker-mirror-acceleration.html>
 	
 	4. git
-	```shell
-	apt install git
-	```
+		```shell
+		apt install git
+		```
 
 	5. rails
-	```shell
-	# node0
-	apt install ruby-railties
-	apt install ruby-bundler
-	```
+		```shell
+		# node0
+		apt install ruby-railties
+		apt install ruby-bundler
+		```
 
 	6. npm
-	
-	```shell
-	# ndoe0
-	apt install npm
-	npm config set registry https://registry.npm.taobao.org
-	npm install n -g
-	n 10.13.0
-	export NODE_HOME=/usr/local
-	export PATH=$NODE_HOME/bin:$PATH
-	export NODE_PATH=$NODE_HOME/lib/node_modules:$PATH
+		```shell
+		# ndoe0
+		apt install npm
+		npm config set registry https://registry.npm.taobao.org
+		npm install n -g
+		n 10.13.0
+		export NODE_HOME=/usr/local
+		export PATH=$NODE_HOME/bin:$PATH
+		export NODE_PATH=$NODE_HOME/lib/node_modules:$PATH
 
-	node -v
-	```
+		node -v
+		```
 
 	7. 关闭、启动节点
-	```shell
-	# 关闭节点
-	bin/cita stop test-chain/0
+		```shell
+		# 关闭节点
+		bin/cita stop test-chain/0
 
-	# 启动节点
-	bin/cita setup test-chain/0
-	bin/cita start test-chain/0
-	```
+		# 启动节点
+		bin/cita setup test-chain/0
+		bin/cita start test-chain/0
+		```
 
 ### 2.1 分别生成 key
 
@@ -91,7 +90,7 @@
 
 - node0、node1 地址分别为：0x2d2ed0d5b613ef9078decdc4ba54f99fe9446be4，0x7d5456e143def3724fb9dc97a258e2467df4160b。
 
-### 2.2 管理员使用 ***真实*** 的 ip 地址初始化 cita 链
+### 2.2 管理员使用 ***`真实`*** 的 ip 地址初始化 cita 链
 - 
 	```shell
 	cd /data/cita/cita_secp256k1_sha3
@@ -105,16 +104,17 @@
 	```shell
 	scp -r test-chain 47.102.201.40:/data/cita/cita_secp256k1_sha3
 	```
-- 这一步如果出错的话，可以参考 <https://www.cnblogs.com/guodavid/p/11004499.html> 的解决方案一，尽量 ***不要*** 使用方案二。
+- 这一步如果出错的话，可以参考 <https://www.cnblogs.com/guodavid/p/11004499.html> 的解决方案一，尽量 ***`不要`*** 使用方案二。
 
 ### 2.4 分别在服务器上启动节点
 
 - 以下以 node0 做演示
-	```shell
-	cd /data/cita/cita_secp256k1_sha3
-	bin/cita setup test-chain/0
-	bin/cita start test-chain/0
-	```
+	- 启动
+		```shell
+		cd /data/cita/cita_secp256k1_sha3
+		bin/cita setup test-chain/0
+		bin/cita start test-chain/0
+		```
 	- 查看是否成功启动
 		```shell
 		bin/cita top test-chain/0
@@ -143,7 +143,7 @@
 	```shell
 	rpc blockNumber
 	```
-- node0 和 node1 查询结果 ***不为*** 0x0 的话，代表正常出块。 
+- node0 和 node1 查询结果 ***`不为`*** 0x0 的话，代表正常出块。 
 	```json
 	{
   		"id": 1,
@@ -187,7 +187,7 @@
 	make up
 	```
 
-- 访问<http://47.102.199.70:8888>(这里的 ip 是服务器的)，如果出现下面的内容，则为正确启动。  
+- 访问<http://47.102.199.70:8888>，如果出现下面的内容，则为正确启动。  
 {"message":"Read more API interface info at https://github.com/cryptape/re-birth"}
 
 ## 4. 在 node0 上部署 microscope
@@ -199,7 +199,7 @@
 	docker run --name microscope -d -p 80:80 microscope
 	```
 
-- 访问<http://47.102.199.70:80>，连接“http://47.102.199.70:1337”，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
+- 访问<http://47.102.199.70:80>，连接"http://47.102.199.70:1337"，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
 
 ## 5. 在 node0 上部署 [first-forever-demo](https://github.com/citahub/first-forever-demo/blob/develop/README-CN.md)
 
@@ -329,7 +329,10 @@
 	docker ps -a
 	```
 
-- 另外还可以配置alert、grafana，详见<https://github.com/citahub/cita-monitor/blob/master/server/README.md#步骤>中的第二步。
+- 另外还可以配置alert、grafana 等，详见<https://github.com/citahub/cita-monitor/blob/master/server/README.md#步骤>中的第二步。
+
+### 6.4 访问 [monitor](http://47.102.199.70:1919)
+- 进入页面后，点击左上角的 `Home`，随后可以选择查看的内容。
 
 
 
