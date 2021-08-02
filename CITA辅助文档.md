@@ -58,8 +58,9 @@
 	```
 
 	6. npm
-	# ndoe0
+	
 	```shell
+	# ndoe0
 	apt install npm
 	npm config set registry https://registry.npm.taobao.org
 	npm install n -g
@@ -69,6 +70,16 @@
 	export NODE_PATH=$NODE_HOME/lib/node_modules:$PATH
 
 	node -v
+	```
+
+	7. 关闭、启动节点
+	```shell
+	# 关闭节点
+	bin/cita stop test-chain/0
+
+	# 启动节点
+	bin/cita setup test-chain/0
+	bin/cita start test-chain/0
 	```
 
 ### 2.1 分别生成 key
@@ -216,25 +227,51 @@
 - 
 	```shell
 	git clone https://github.com.cnpmjs.org/citahub/cita-monitor.git
+	cd cita-monitor
 	git submodule update --init
 	```
 
 ### 6.1 部署 agent
 
+- ⚠️ xx.xx.xx.xx 处使用 `hostname -I` 命令获取的第一个 ip（10.10.0.202）替换，而不是使用 47.102.199.70
+
+#### 6.1.1 单节点部署
+- 
+	```shell
+	cd agent/cita_exporter
+	docker build -t citamon/agent-cita-exporter .
+	cd ..
+
+	docker run -d --name="citamon_agent_cita_exporter_1337" \
+	--pid="host" \
+	-p 1920:1923 \
+	-v /etc/localtime:/etc/localtime \
+	-v "/data/cita/cita_secp256k1_sha3/":"/data/cita/cita_secp256k1_sha3/" \
+	-v "/data/cita/cita_secp256k1_sha3/test-chain/0":"/data/cita/cita_secp256k1_sha3/test-chain/0" \
+	-e NODE_IP_PORT="xx.xx.xx.xx:1337" \
+	-e NODE_DIR="/data/cita/cita_secp256k1_sha3/test-chain/0" \
+	citamon/agent-cita-exporter
+
+	# 检查是否正常运行
+	curl http://localhost:1920/metrics/cita
+	```
+
+#### 6.1.2 编排部署
+
 - 
 	```shell
 	cd agent
 	cp .env.example .env
+	vi .env
 	```
 
-- 配置 .env，以下为参考配置
-
+- 参考配置
 	```shell
 	# citamon_agent_cita_exporter HostName
 	HOSTNAME=iZuf6098m9sg0sswpg1mcyZ
 
 	# CITA node ip and port
-	NODE_IP=47.102.199.70
+	NODE_IP=xx.xx.xx.xx
 	NODE_PORT=1337
 
 	# CITA node directory analysis
@@ -243,14 +280,26 @@
 
 	# CITA NODE INFO
 	CITA_NODENAME=node_0
-	CITA_CHAIN_ID=test-chain
+	CITA_CHAIN_ID=test-chain/0
 	CITA_NETWORKPORT=4000
 	```
 
 - 启动
-
 	```shell
 	docker-compose up -d
+
+	# 查看数据采集信息
+	#citamon_agent_host_exporter
+	curl http://localhost:1920/metrics/host
+
+	#citamon_agent_process_exporter
+	curl http://localhost:1920/metrics/process
+
+	#citamon_agent_rabbitmq_exporter
+	curl http://localhost:1920/metrics/rabbitmq
+
+	#citamon_agent_cita_exporter
+	curl http://localhost:1920/metrics/cita
 	```
 
 ### 6.2 部署 server
@@ -259,11 +308,28 @@
 	```shell
 	cd ../server
 	cp .env.example .env
-	# 可以不配置 .env
+	# 可以在 .env 中将语言设置为 cn，也可以不配置 .env
+	```
+
+- 修改 prometheus 配置
+	```shell
+	cd config
+	vi prometheus.yml
+	```
+
+- 将其中的 citamon_server_alertmanager 和 citamon_agent_host_ip 换成 xx.xx.xx.xx
+
+- 运行
+	```shell
 	export VERSION=`cat ../VERSION`
 	docker-compose build
 	docker-compose up -d
+
+	# 查看是否正常运行
+	docker ps -a
 	```
+
+- 另外还可以配置alert、grafana，详见<https://github.com/citahub/cita-monitor/blob/master/server/README.md#步骤>中的第二步。
 
 
 
