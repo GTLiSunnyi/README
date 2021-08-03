@@ -331,8 +331,8 @@
 
 - 另外还可以配置alert、grafana 等，详见<https://github.com/citahub/cita-monitor/blob/master/server/README.md#步骤>中的第二步。
 
-### 6.4 访问 [monitor](http://47.102.199.70:1919)
-- 进入页面后，点击左上角的 `Home`，随后可以选择查看的内容。
+### 6.4 访问 monitor
+- 进入[页面](http://47.102.199.70:1919)后，点击左上角的 `Home`，随后可以选择查看的内容。
 
 
 
