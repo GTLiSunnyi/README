@@ -2,6 +2,8 @@
 
 ## 1. 说明
 
+- 此文档给使用者提供部署 Toolchain 和分布式部署 CITA 的步骤、流程。
+
 * [CITA 文档](https://docs.citahub.com/zh-CN/cita/cita-intro)中需要掌握的内容为：
 	1. 快速入门
 	2. 配置说明（链级配置）
@@ -21,7 +23,7 @@
 
 * 两台服务器ip地址分别为  
 	node0（ubuntu16.04、superadmin）: 47.102.199.70  
-	node1（ubuntu16.04）: 47.102.201.4
+	node1（ubuntu16.04）: 47.102.201.40
   
 * 依赖  
 	1. wget
@@ -30,7 +32,7 @@
 		apt-get install wget
 		```
 
-	2. 根据[文档](https://docs.citahub.com/zh-CN/cita/getting-started/setup#安装-cita-客户端工具)在 node0 上安装 cita、cita-cli，在 node1 上安装 cita-cli。
+	2. 根据[文档](https://docs.citahub.com/zh-CN/cita/getting-started/setup#安装-cita-客户端工具)在 node0、node1 上安装 cita、cita-cli。
 
 	3. docker
 		```shell
@@ -71,16 +73,6 @@
 		node -v
 		```
 
-	7. 关闭、启动节点
-		```shell
-		# 关闭节点
-		bin/cita stop test-chain/0
-
-		# 启动节点
-		bin/cita setup test-chain/0
-		bin/cita start test-chain/0
-		```
-
 ### 2.1 分别生成 key
 
 - 
@@ -96,7 +88,7 @@
 	cd /data/cita/cita_secp256k1_sha3
 	bin/cita create --super_admin 0x2d2ed0d5b613ef9078decdc4ba54f99fe9446be4  --nodes "47.102.199.70:4000,47.102.201.40:4000" --contract_arguments SysConfig.blockInterval=20000  
 	```
-- 注意：这里设置出块速度为20s，具体其他链的参数配置可参考[文档](https://docs.citahub.com/zh-CN/cita/configuration-guide/chain-config)。
+- ⚠️：这里设置出块速度为20s，具体其他链的参数配置可参考[文档](https://docs.citahub.com/zh-CN/cita/configuration-guide/chain-config)。
 
 ### 2.3 node0 将 test-chain 中的内容复制到 node1
 
@@ -130,7 +122,7 @@
 		root      2548  2542  0 15:37 ?        00:00:00 cita-jsonrpc -c jsonrpc.toml  
 		root      2553  2542  1 15:37 ?        00:00:00 cita-network -c network.toml  
 		```
-- 在 node1 上重复步骤4的操作
+- 在 node1 上重复以上操作
 - node1 的 cita-cli 需要使用下面的命令连接到它本地的服务
 	```shell
 	cita-cli
@@ -142,14 +134,6 @@
 - 
 	```shell
 	rpc blockNumber
-	```
-- node0 和 node1 查询结果 ***`不为`*** 0x0 的话，代表正常出块。 
-	```json
-	{
-  		"id": 1,
-  		"jsonrpc": "2.0",
-  		"result": "0x46"
-	}
 	```
 
 ## 3. 在 node0 上部署 rebirth
