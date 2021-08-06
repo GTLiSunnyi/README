@@ -19,6 +19,8 @@
 	12. 工具链（除了 Cyton、IDE、Truffle Box、Web Debugger、Testnet，其他要求会部署）
 	13. first-forever-demo
 
+- ⚠️ 文档中 xx.xx.xx.xx 处使用 `hostname -I` 命令获取的第一个 ip（10.10.0.202）替换，而不是使用 47.102.199.70
+
 ## 2. 分布式部署（两个节点）
 
 * 两台服务器ip地址分别为  
@@ -153,7 +155,6 @@
 	gem install bundler:1.17.1
 	bundle update mimemagic
 	make setup
-	mv .env .env.local
 	docker-compose run --rm app bundle exec rails secret
 	```
 
@@ -164,7 +165,9 @@
 	8ee35bb6809a823ed3ab1779edeb5ac244ffab2bb76017a8dbcd754d44bb8da8a3391cf929dfccd9d94307cfc04632e4b77278f5f543bb15bb74f49526e34284
 	```
 
-- 将 .env.local 中的 SECRET_KEY_BASE 字段改为上文中的值：8ee35bb6809a823ed3ab1779edeb5ac244ffab2bb76017a8dbcd754d44bb8da8a3391cf929dfccd9d94307cfc04632e4b77278f5f543bb15bb74f49526e34284
+- 将 .env.local 中的 SECRET_KEY_BASE 字段改为上文中输出的值：8ee35bb6809a823ed3ab1779edeb5ac244ffab2bb76017a8dbcd754d44bb8da8a3391cf929dfccd9d94307cfc04632e4b77278f5f543bb15bb74f49526e34284
+
+- 将 .env 中的 CITA_URL 字段改为 "http://xx.xx.xx.xx:1337/"
 
 - 最后启动 rebirth
 	```shell
@@ -183,7 +186,7 @@
 	docker run --name microscope -d -p 80:80 microscope
 	```
 
-- 访问<http://47.102.199.70:80>，连接<http://47.102.199.70:1337>，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
+- 访问<http://47.102.199.70:80>，连接<http://47.102.199.70:8888>，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
 
 ## 5. 在 node0 上部署 [first-forever-demo](https://github.com/citahub/first-forever-demo/blob/develop/README-CN.md)
 
@@ -191,6 +194,7 @@
 	```shell
 	# 在下面的“github.com”后面加上“cnpmjs.org”可以不用翻墙下载，所有的“git clone”都可以泗洪这种方式
 	git clone https://github.com.cnpmjs.org/citahub/first-forever-demo.git
+	cd first-forever-demo
 	npm install
 	cp .env.example .env
 	cp ./src/config.js.example ./src/config.js
@@ -198,7 +202,8 @@
 
 	# copy contractAddress to src/config.js
 	# configure the other two variables
-	# chain: 'https://47.102.199.70:1337',
+	# Just fill in a legal private key
+	# chain: 'http://47.102.199.70:1337',
   	# privateKey: '0x934c13d78dbc092da41c10efb26092cc6d5062f92668823e024a583ce7b7ccf9',
 
 	npm start
@@ -216,8 +221,6 @@
 	```
 
 ### 6.1 部署 agent
-
-- ⚠️ xx.xx.xx.xx 处使用 `hostname -I` 命令获取的第一个 ip（10.10.0.202）替换，而不是使用 47.102.199.70
 
 #### 6.1.1 单节点部署
 - 
