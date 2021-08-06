@@ -183,7 +183,7 @@
 	docker run --name microscope -d -p 80:80 microscope
 	```
 
-- 访问<http://47.102.199.70:80>，连接"http:///47.102.199.70:1337"，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
+- 访问<http://47.102.199.70:80>，连接"http:\//47.102.199.70:1337"，可以看到出块间隔为 20s，随后区块高度也会刷新，这代表 microscope 成功运行。
 
 ## 5. 在 node0 上部署 [first-forever-demo](https://github.com/citahub/first-forever-demo/blob/develop/README-CN.md)
 
