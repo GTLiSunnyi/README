@@ -60,4 +60,4 @@
 	```
 
 ## 3. 
-[](../images/middleware-upload.png)
+![middleware-upload](../images/middleware-upload.png)
