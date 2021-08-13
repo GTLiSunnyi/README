@@ -2,7 +2,7 @@
 
 ## 1. 说明
 
-- 此文档给使用者提供部署 Toolchain 和分布式部署 CITA 的步骤、流程。
+- 此文档给使用者提供部署 Toolchain 和分布式部署 CITA（v20.2.0） 的步骤、流程。
 
 * [CITA 文档](https://docs.citahub.com/zh-CN/cita/cita-intro)中需要掌握的内容为：
 	1. 快速入门
@@ -47,7 +47,7 @@
 		ssh root@47.102.201.40
 		curl -sSL https://get.daocloud.io/docker | sh
 		```
-		- 给 docker 配置镜像<https://www.runoob.com/docker/docker-mirror-acceleration.html>
+		- 给 docker 配置镜像：<https://www.runoob.com/docker/docker-mirror-acceleration.html>
 	
 	4. git
 		```shell
