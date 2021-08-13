@@ -58,3 +58,6 @@
 	git clone git@gitlab.taidihub.com:flyq/hmac_sig.git
 	
 	```
+
+## 3. 
+[](../images/middleware-upload.png)
