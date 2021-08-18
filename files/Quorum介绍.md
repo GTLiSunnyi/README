@@ -53,5 +53,5 @@
 
 ## 6. 其他
 
-- 把 [consistency-checker](https://docs.goquorum.consensys.net/en/stable/Reference/GoQuorum-Projects/) 当成预言机来使用
+- Quorum 把 [consistency-checker](https://docs.goquorum.consensys.net/en/stable/Reference/GoQuorum-Projects/) 当成预言机来使用
 - 很多以太坊上的开发框架都能在 Quorum 上使用，如：Truffle、Remix-IDE
