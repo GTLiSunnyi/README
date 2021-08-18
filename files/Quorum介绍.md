@@ -10,7 +10,7 @@
 
 ## 2. 逻辑架构
 
-![逻辑架构图](../../images/逻辑架构.png)
+![逻辑架构图](../images/逻辑架构.png)
 
 - Quorum 的主要组件：
 
@@ -23,11 +23,11 @@
 
 - Quorum 的交易有两种：公开交易和私有交易。交易保留 gas，但是 gasPrice = 0，没有原生代币。
 
-![广播私有交易图](../../images/广播私有交易.png)
+![广播私有交易图](../images/广播私有交易.png)
 
 - 隐私交易的 Transaction payload 是一个 hash 值，这个 hash 值是由 Transaction Manager 提供，链上的节点只能看到 hash 值，看不到交易内容。当你是交易的相关人员时，就可以通过 Transaction Manager 和 Enclave 来获得这笔交易的正确内容。
 
-![私有交易流程图](../../images/QuorumTransactionProcessing.jpg)
+![私有交易流程图](../images/QuorumTransactionProcessing.jpg)
 - 这是一个私有交易的详细流程，其中 Transaction AB 跟 party A 和 party B 相关，与 party C 无关。Party 可以看作是一个人或者一个组织。
 
 - Transaction Manager
