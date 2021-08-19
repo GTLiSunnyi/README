@@ -47,7 +47,8 @@
 
 - 在共识方法上, Quorum 用 QuorumChain 取代了以太坊的 POW, 最新推出的 2.0.0 使用了基于 Raft 的共识方法取代了 QuorumChain。
 - 相比 QuorumChain，Raft-based 不会产生空的区块，tps 更高。
-- Quorum 还提供了 IBFT 和 POA（使用 POA 容易分叉，不适合在金融业务中使用）。
+- Quorum 还提供了 IBFT 和 POA（技术文档里很少提到 POA，POA 容易分叉，不适合在金融业务中使用）。
+- 他们在 release [文档](https://github.com/ConsenSys/quorum/releases)里还提到了 QBFT 共识算法，但是技术文档里倒没提到。
 
 - [raft 算法简介](https://www.jianshu.com/p/8e4bbe7e276c)，最后有个演示的动画链接。
 
