@@ -54,6 +54,12 @@
 	# latest 版本拉不下来，使用21.7
 	docker pull quorumengineering/quorum:21.7
 	docker pull quorumengineering/tessera:21.7
+
+	# 安装 geth命令
+	git clone https://github.com/Consensys/quorum.git
+	cd quorum
+	make all # 需要设置 proxy
+	cp build/bin/geth /usr/local/bin/
 	```
 
 ## 3. 工具
