@@ -15,7 +15,7 @@
 	qctl --help
 	```
 
-### 1.3 启动一个网络
+### 1.3 启动 qubernetes 网络
 - 方式一
 	```shell
 	git clone https://github.com/ConsenSys/qubernetes.git
@@ -61,6 +61,10 @@
 	make all # 需要设置 proxy
 	cp build/bin/geth /usr/local/bin/
 	```
+
+### 2.2 启动 quorum 网络
+
+- 这个[文档](https://docs.goquorum.consensys.net/en/stable/Tutorials/Create-a-Raft-network/#1-create-directories)说得很清楚，但是 start 节点的时候可能会出错，对后续操作没有影响。
 
 ## 3. 工具
 
