@@ -308,6 +308,7 @@
 
 - 运行
 	```shell
+	cd ..
 	export VERSION=`cat ../VERSION`
 	docker-compose build
 	docker-compose up -d
@@ -321,10 +322,8 @@
 ### 6.4 访问 monitor
 - 进入[页面](http://47.102.199.70:1919)后，点击左上角的 `Home`，随后可以选择查看的内容。
 
-
-
-
-
-
-
-
+## 7. CITA 服务重启
+* 重启节点
+* 重启每个节点的 agent 服务
+* 存储不够可以删除 re-birth/logs 下的文件
+* 使用 `docker-compose logs -f citamon_server_alertmanager` 命令查看 alertmanager 是否报错
