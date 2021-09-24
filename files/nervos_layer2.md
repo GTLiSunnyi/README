@@ -1,12 +1,10 @@
-# Nervos layer2——Godwoken
+# Nervos layer2
 
-## 1. 简介
+## 1. Godwoken
 
-- 目前 ckb 的 layer2 还只实现了 PoA 的 optimistic rollup，将来会实现 zk rollup 和 PoS 的 optimistic rollup。
+- 目前 ckb 的 layer2 实现了 PoA 的 optimistic rollup，不过文档还没更新完成，将来会实现 zk rollup 和 PoS 的 optimistic rollup。
 
 	> PoA 实现：<https://github.com/nervosnetwork/clerkb>
-
-## 2. 基本流程
 
 ![layer2](../images/nervos_layer2.png)
 
@@ -29,3 +27,12 @@
 5. layer2 区块最终确认后就不能发起挑战了。
 	
 	> 聚合者需要承担 ckb 的流动成本和 layer2 交易在 layer1 中执行的成本。
+
+## 2. Polyjoice
+
+- 个人猜想：Nervos 想要通过 eth-force-bridge 实现 layer1 与以太坊兼容，通过 Polyjoice 实现 layer2 与以太坊 dapp 兼容。
+
+## 3. YokaiSwap
+
+- YokaiSwap 基于 Godwoken，所有的操作都是在 layer2 上进行。
+- 目前在测试网的 layer2 上公测。
