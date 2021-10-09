@@ -149,7 +149,6 @@
 - 接着执行以下命令启动 rebirth
 	```shell
 	cd re-birth
-	gem install -n /usr/local/bin cocoapods
 	apt-get install libpq-dev
 	gem install pg
 	gem install bundler:1.17.1
