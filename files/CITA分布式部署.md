@@ -142,9 +142,14 @@
 - 
 	```shell
 	git clone https://github.com/citahub/re-birth.git
+	apt install gpg2
+	echo 409B6B1796C275462A1703113804BB82D39DC0E3:6: | gpg2 --import-ownertrust
+	echo 7D2BAF1CF37B13E2069D6956105BD0E739499BDB:6: | gpg2 --import-ownertrust
+	\curl -sSL https://get.rvm.io | bash -s stable
+	source /usr/local/rvm/scripts/rvm
+	rvm install ruby-2.5.3
+	rvm --default use 2.5.3
 	```
-
-- [安装 rvm](https://blog.csdn.net/weixin_33970449/article/details/89758010)，将 ruby 切换到 2.5.3 版本。
 
 - 接着执行以下命令启动 rebirth
 	```shell
