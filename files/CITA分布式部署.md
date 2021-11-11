@@ -334,3 +334,11 @@
 * 重启每个节点的 agent 服务
 * 存储不够可以删除 re-birth/logs 下的文件
 * 使用 `docker-compose logs -f citamon_server_alertmanager` 命令查看 alertmanager 是否报错
+* 有的时候 cita-monitor 的页面会突然访问不了，查看 docker logs 发现空间不足，这是由于 inodes 占用太多
+	```shell
+	# 查看 inodes 使用情况
+	df -ih
+	# 查看目录下 inodes 使用前几的文件夹
+	find  -type f | awk -F / -v OFS=/ '{$NF="";dir[$0]++}END{for(i in dir)print dir[i]""i}'|sort -k1 -nr|head
+	# 发现一个可以的 sessions 文件夹，删掉就行了
+	```
