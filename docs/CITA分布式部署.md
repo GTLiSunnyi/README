@@ -342,3 +342,22 @@
 	find  -type f | awk -F / -v OFS=/ '{$NF="";dir[$0]++}END{for(i in dir)print dir[i]""i}'|sort -k1 -nr|head
 	# 发现一个可以的 sessions 文件夹，删掉就行了
 	```
+
+## 8. 磁盘扩容
+- 需要扩容的是 /data 分区
+```shell
+df -Th
+# 发现 /data 对应的是 /dev/vdb
+
+# 查看 /dev/vdb 下有无分支
+lsblk
+
+#如果有
+growpart /dev/vdb 1
+resize2fs /dev/vdb1
+
+# 如果没有
+resize2fs /dev/vdb
+```
+<https://www.cnblogs.com/littleby/p/9843620.html>
+<https://www.cnblogs.com/joshua317/p/15248698.html>
