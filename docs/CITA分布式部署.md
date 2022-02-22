@@ -359,5 +359,6 @@ resize2fs /dev/vdb1
 # 如果没有
 resize2fs /dev/vdb
 ```
+<https://blog.csdn.net/qq_27062249/article/details/109090002>
 <https://www.cnblogs.com/littleby/p/9843620.html>
 <https://www.cnblogs.com/joshua317/p/15248698.html>
