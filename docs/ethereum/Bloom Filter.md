@@ -52,5 +52,5 @@ n = 7
 
 但是当插入的数据量大幅提升的时候，甚至 bitMap 全部被置为1的时候问题就很严重了，误识率就非常高了，这个也是根据不同场景实现布隆过滤器所要考虑的问题。
 
-[参考文档1](https://blog.csdn.net/wcc19840827/article/details/116782838)  
-[参考文档2](https://zhuanlan.zhihu.com/p/64378536)
+[参考文档1 2021-05-14](https://blog.csdn.net/wcc19840827/article/details/116782838)  
+[参考文档2 2019-08-27](https://zhuanlan.zhihu.com/p/64378536)

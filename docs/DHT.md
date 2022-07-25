@@ -4,8 +4,8 @@
 DHT 是一种分布式存储方法。在不需要服务器的情况下，每个客户端负责一个小范围的路由，并负责存储一小部分数据，从而实现整个 DHT 网络的寻址和存储。
 
 ## 2. Kademlia
-[参考文档1](https://www.jianshu.com/p/eba4673b0d9a)  
-[参考文档2](https://zhuanlan.zhihu.com/p/38425656)
+[参考文档1 2018-7-23](https://www.jianshu.com/p/eba4673b0d9a)  
+[参考文档2 2018-6-25](https://zhuanlan.zhihu.com/p/38425656)
 ### 2.1 bucket
 - kad 网络中的使用 SHA1 来计算节点 id
     > Ethereum 使用 sha3，也是 256 位哈希空间， 32 字节。
@@ -78,7 +78,7 @@ k-bucket 的更新：
 Kademlia 用于完全开放的 P2P 网络，不提供安全措施，容易受到恶意节点的攻击。S/K 协议做了一些安全措施，不过，由于区块链中的共识算法和密码学应用，使用 Kademlia 协议也不会存在安全问题。
 
 ### 4. Chord（现在使用较少）
-[参考文档](https://blog.csdn.net/qq_21518355/article/details/88393374)
+[参考文档 2019-3-11](https://blog.csdn.net/qq_21518355/article/details/88393374)
 
 Coral适用于软状态的健值对检索，即同一个key可能保存多个value
 Coral 是一种在DHT的基础上扩展的索引机制，称之为DSHT(distributed sloppy hash table)。每个节点根据时延将节点划分为3个等级L2(<20ms),L1(<60ms),L0(其他)。同一个等级的节点放在同一个集群（cluster），每个节点维护3个dht。

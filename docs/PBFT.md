@@ -1,6 +1,6 @@
 # PBFT
-[参考文档1](https://blog.csdn.net/wuzhengfei1112/article/details/105890053/)  
-[参考文档2](https://zhuanlan.zhihu.com/p/93023831)
+[参考文档1 2020-5-2](https://blog.csdn.net/wuzhengfei1112/article/details/105890053/)  
+[参考文档2 2019-11-21](https://zhuanlan.zhihu.com/p/93023831)
 
 ## 1. 简介
 PBFT一般用于联盟链场景中，它是共识节点较少的情况下BFT的一种解决方案，PBFT 中的共识节点不宜超过100个，否则效率极低。
