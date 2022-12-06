@@ -14,3 +14,6 @@ defer func() {
 	}
 }()
 ```
+
+- 使用场景
+> 延迟 close 和 recover panic
