@@ -1,4 +1,5 @@
 # Layer2
+[参考资料1 2022-06-15](https://mp.weixin.qq.com/s/z5BQXwdg-oiO8NHbRysclg)  
 
 ## 1. 简介
 “Layer1 来保证安全和去中心化，绝对可靠、可信；它能做到全球共识，并作为「加密法院」，通过智能合约设计的规则进行仲裁，以经济激励的形式将信任传递到 Layer2 上。而 Layer2 追求极致的性能，它只能做到局部共识，但是能够满足各类商业场景的需求。“ --ckb 的设计思想
@@ -36,5 +37,3 @@ Optimistic Rollups、Zk Rollup、Plasma 和 Validium / Zk porter。
     > 其问题在于:   
     > 1. 制造一个对零知识证明友好的 EVM (zkEVM) 在技术上有许多困难，这使得 zk Rollup 的落地速度会慢于 Optimistic Rollups；  
     > 2. 生成一个零知识证明 (ZKP) 需要成本，现今许多团队正在改进 zk 算法/硬件以减少生成 ZKP 的成本和增加其生成速度。尽管 zk Rollup 有这些问题，因为其更高的可扩展性、安全性和正统性，zkRollup 将成为主流。
-
-[参考资料1 2022-06-15](https://mp.weixin.qq.com/s/z5BQXwdg-oiO8NHbRysclg)  
