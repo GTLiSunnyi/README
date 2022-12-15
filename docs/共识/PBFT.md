@@ -1,6 +1,4 @@
 # PBFT
-[参考文档1 2020-5-2](https://blog.csdn.net/wuzhengfei1112/article/details/105890053/)  
-[参考文档2 2019-11-21](https://zhuanlan.zhihu.com/p/93023831)
 
 ## 1. 简介
 PBFT 一般用于联盟链场景中，它是共识节点较少的情况下BFT的一种解决方案，PBFT 中的共识节点不宜超过100个，否则效率极低。 
@@ -36,10 +34,11 @@ https://lessisbetter.site/2020/03/15/why-pbft-needs-3-phase-message/
 节点总数是 n，其中作恶节点有 f，那么剩下的正确节点为 n-f，节点不能等到收集全部 n 个响应再进入下一个阶段，这样会导致不能达成最终共识。所以，节点需要对 n-f 个消息做出决定，但是这 n-f 个消息有可能有 f 个是由作恶节点冒充的，那么正确的消息就是 n-f-f 个，所以 n 最少是 3f+1 个。
 
 ## 5. 垃圾清理
-节点每执行 K 条请求后向全网发起广播，如果超过 2f+1 的节点返回这 k 条请求也执行完毕了的消息，那就可以删除这K条的信息了。这个过程叫 checkpoint。  
-实际上当节点向全网发出 checkpoint 共识后，其他节点可能没有执行完这 K 条请求，所以节点不会立即得到响应，它还要继续自己的事情。我们可以设置一个变量 L，L 是 k 的倍数，当距离上一次 checkpoint L 时，节点需要 checkpoint 后才能继续共识。
+节点每执行 K 条请求后向全网发起广播，如果超过 2f+1 的节点返回这 k 条请求也执行完毕了的消息，那就可以删除这 K 条的信息了。 此时 k 为一个 checkpoint。
+实际上当节点向全网发出垃圾清理共识后，其他节点可能没有执行完这 K 条请求，所以节点不会立即得到响应，它还要继续自己的事情。我们可以设置一个变量 L，L 是 k 的倍数，当距离上一次垃圾清理 L 时，节点需要垃圾清理后才能继续共识。
 
 ## 6. view change
+checkpoint 就是当前节点处理的最新请求序号。stable checkpoint（稳定检查点）就是大部分节点已经共识完成的最大请求序号。  
 发生 view change 时，view 会自增，主节点通过 v % n 计算得来。
 
 ### 触发 view change 的4个条件：  
@@ -48,14 +47,24 @@ https://lessisbetter.site/2020/03/15/why-pbft-needs-3-phase-message/
 3. 节点收到的 view change 消息达到 f+1 个
 4. new-view 消息不合法
 
-### 视图切换过程中有3个消息：view-change 消息、view-change-ack 消息和 new-view 消息
+### 视图切换过程中有3个消息： 
+view-change 消息、view-change-ack 消息和 new-view 消息
+![view change](../../images/view-change.png)
 
-view-change 消息包含下列字段：
+### view-change 消息包含下列字段：
 - h：从节点最新的 checkpoint 序号
 - C：从节点 h 之后的（非稳定）checkpoint
-- P和Q
-> P是已经Prepared消息的信息集合：消息既然已经Prepared，说明**至少2f+1的节点拥有了消息，并且认可<view, n, d>**，即为消息分配的view和序号，只是还差一步commit阶段就可以完成一致性确认。P中包含的就是已经达到Prepared的消息的摘要d，无需包含完整的请求消息。新的view中，这些请求会使用老的序号n，而无需分配新的序号。
+- P
+> P 是大于 h 已经 Prepared 消息的集合。消息既然已经 Prepared，说明**至少 2f+1 的节点认可<v, n, d>**，只差 commit 就可以完成一致性确认。P 中包含：主节点发送的一个 Pre-prepare 消息和 2f+1 个 Prepare 消息。
 
-过程：
-1. 当 client 发送请求 primary 后，一定时间没收到回复，则会发送请求给从节点，从节点收到 request 后，起一个 timer，如果 timer 过期，还没执行这个 request(commit 还没达一致)，则从节点发起 view-change
-2. 从节点广播一个 view-change 消息，包含原来视图编号 v 和下个视图编号 v+1，如果节点收到的 view-change 消息多于三分之二，则说明 view-change 达成一致。
+### view-change-ack 消息
+从节点收到 2f+1 个 view-change 消息后，验证，并将结果（view-change-ack）发送给新的主节点。
+
+### new-view 消息
+新的主节点收到 2f+1 个view-change-ack（包含自己的）消息后，选出一个最大的 checkpoint h，主节点会从 h 和 h+L 之间，一次对请求进行 Pre-prepare，如果这个请求在上一个 view 中达到 Prepared，就直接 commit。
+
+new-view 消息包含下列字段：
+- view：当前新视图的编号
+- V：有效的 view-change 消息集合，用于证明，主节点已经获得大多数节点的认可。
+- X：需要执行的请求的集合
+- α：主节点对 new-view 消息的数字签名
