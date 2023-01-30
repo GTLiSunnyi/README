@@ -1,4 +1,4 @@
-# Quorum 介绍
+# Quorum
 
 ## 1. 说明
 

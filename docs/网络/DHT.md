@@ -1,4 +1,4 @@
-# DHT（分布式哈希表技术）
+# DHT（分布式哈希表）
 
 ## 1. 简介
 DHT 是一种分布式存储方法。在不需要服务器的情况下，每个客户端负责一个小范围的路由，并负责存储一小部分数据，从而实现整个 DHT 网络的寻址和存储。
@@ -8,15 +8,15 @@ DHT 是一种分布式存储方法。在不需要服务器的情况下，每个�
 [参考文档2 2018-6-25](https://zhuanlan.zhihu.com/p/38425656)
 ### 2.1 bucket
 - kad 网络中的使用 SHA1 来计算节点 id
-    > Ethereum 使用 sha3，也是 256 位哈希空间， 32 字节。
-    > IPFS 中都使用 SHA256 来计算 Node ID，长度和 Ethereum 相同。
+    > Ethereum 使用 sha3，也是 32 字节。
+    > IPFS 中使用 SHA256 来计算 Node ID，长度和 Ethereum 相同。
 - 节点之间通过异或 id 计算距离，异或值越小，距离越近。
 - 节点会根据距离维护 k-bucket 组，k-bucket[1] 是距离为1的节点，k-bucket[2] 是距离为2的...
-- k-bucket[k] 中最多保存 k 个节点，实际 k 通常 =20。
+- k-bucket[k] 中最多保存 k 个节点，k 通常 =20。
 - k-bucket 的高度必须是偶数，BitTorrent 为8，Ethereum 为16。
 
 k-bucket表结构如下图所示：
-![k-bucket表](../images/k-bucket表.png)
+![k-bucket表](../../images/k-bucket表.png)
 
 k-bucket 的更新：
 - 每层 k-bucket 中，会把在线时间长的节点放在前面的位置。
@@ -36,7 +36,7 @@ k-bucket 的更新：
 > id 最好由 ip 地址 hash 获得，对其他节点发送请求时需要附带 id 和 ip，如果 ip 造假，tcp 连接就会失败。
 
 ### 2.3 路由查询
-查询的核心思想是：逐步迭代，递近查找。其过程如下：
+过程如下：
 > 假设节点 m 想要找到节点 x、和 x 的距离是 d。  
 > 1. 节点 m 使用 FIND_NODE 操作：找到距离 x 最近的 alpha 个节点。  
 > 2. 然后这 alpha 个节点再进行 FIND_NODE 操作，直到找到 x。
